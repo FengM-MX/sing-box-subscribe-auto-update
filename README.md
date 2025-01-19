@@ -6,6 +6,11 @@
 
 
 ### 使用教程
+- 本地构建
+```
+docker build -t ruicaok/sing-box-subscribe:lastest .
+```
+
 - 直接运行
 ```shell
 docker run -itd -e USER_ID=1000 -e GROUP_ID=1000 -p 5000:5000 -v /your_local_path:/sing-box-subscribe ruicaok/sing-box-subscribe:lastest
