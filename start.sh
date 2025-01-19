@@ -25,9 +25,7 @@ if [ ! -f "/sing-box-subscribe/api/app.py" ];then
    #cp -rf /tmp/sing-box-subscribe/.gitignore /sing-box-subscribe/
 fi
 echo "grant permissions..."
-ls -al /tmp/sing-box-subscribe
 chown -R $USER_ID:$GROUP_ID /sing-box-subscribe
-ls -al /sing-box-subscribe
 # 拉取最新代码
 echo "start pulling the latest code"
 gosu $USER_ID bash -c 'cd /sing-box-subscribe && \
