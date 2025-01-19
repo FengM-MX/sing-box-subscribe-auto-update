@@ -2,8 +2,12 @@
 # 如果指定了 USER_ID，则创建用户
 if ! id -u $USER_ID > /dev/null 2>&1; then
     groupadd -g $GROUP_ID subscribe
-    useradd -u $USER_ID -g subscribe -m subscribe
+    useradd -u $USER_ID -g subscribe -s /bin/bash -m subscribe
 fi
+
+# 取消git filemode模式
+echo "disable git filemode..."
+git config --global core.filemode false
 
 echo "copy the program from /tmp/sing-box-subscribe to /sing-box-subscribe"
 # 文件不存在，则移动程序文件
@@ -21,11 +25,13 @@ if [ ! -f "/sing-box-subscribe/api/app.py" ];then
    #cp -rf /tmp/sing-box-subscribe/.gitignore /sing-box-subscribe/
 fi
 echo "grant permissions..."
+ls -al /tmp/sing-box-subscribe
 chown -R $USER_ID:$GROUP_ID /sing-box-subscribe
-chmod -R 755 /sing-box-subscribe
+ls -al /sing-box-subscribe
 # 拉取最新代码
 echo "start pulling the latest code"
 gosu $USER_ID bash -c 'cd /sing-box-subscribe && \
+    git config core.filemode false && \
     git stash save && \
     git pull --rebase && \
     git stash pop && \

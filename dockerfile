@@ -9,8 +9,7 @@ RUN \
     apt update && \
     apt install -y git gosu && \
     git clone https://github.com/Toperlock/sing-box-subscribe.git /tmp/sing-box-subscribe && \
-    sed 's/"exclude_protocol":"ssr"/"exclude_protocol":""/g' /tmp/sing-box-subscribe/providers.json && \
-    git config --global core.filemode false
+    sed 's/"exclude_protocol":"ssr"/"exclude_protocol":""/g' /tmp/sing-box-subscribe/providers.json 
 
 # 切换用户
 
